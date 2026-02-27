@@ -1,11 +1,294 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>PakePlus</title>
-    </head>
-    <body>
-        Hello World
-    </body>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美好未来</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #0f0c29);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            overflow: hidden;
+            font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            padding: 40px;
+        }
+
+        .text-wrapper {
+            position: relative;
+        }
+
+        .glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+            animation: pulse 3s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.8; }
+        }
+
+        .main-text {
+            font-size: clamp(36px, 7vw, 72px);
+            font-weight: 900;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #ffffff;
+            text-shadow: 
+                0 0 5px #fff,
+                0 0 10px #fff,
+                0 0 20px #00ffff,
+                0 0 40px #00ffff,
+                0 0 60px #00ffff,
+                0 0 80px #0080ff,
+                2px 2px 4px rgba(0, 0, 0, 0.8);
+            -webkit-text-stroke: 1px #00ffff;
+        }
+
+        .main-text .line {
+            display: block;
+            animation: neonGlow 1.5s ease-in-out infinite alternate;
+        }
+
+        .main-text .line:nth-child(1) { animation-delay: 0s; }
+        .main-text .line:nth-child(2) { animation-delay: 0.3s; }
+        .main-text .line:nth-child(3) { animation-delay: 0.6s; }
+
+        @keyframes neonGlow {
+            from {
+                text-shadow: 
+                    0 0 5px #fff,
+                    0 0 10px #fff,
+                    0 0 20px #00ffff,
+                    0 0 40px #00ffff,
+                    0 0 60px #00ffff,
+                    0 0 80px #0080ff,
+                    2px 2px 4px rgba(0, 0, 0, 0.8);
+            }
+            to {
+                text-shadow: 
+                    0 0 10px #fff,
+                    0 0 20px #fff,
+                    0 0 30px #ff4da6,
+                    0 0 40px #ff4da6,
+                    0 0 50px #ff4da6,
+                    0 0 60px #ff4da6,
+                    0 0 70px #ff4da6,
+                    2px 2px 4px rgba(0, 0, 0, 0.8);
+            }
+        }
+
+        .secret-area {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 40px;
+            height: 40px;
+            cursor: default;
+            z-index: 1000;
+        }
+
+        .shooting-star {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1),
+                        0 0 0 8px rgba(255, 255, 255, 0.1),
+                        0 0 20px rgba(255, 255, 255, 1);
+            animation: shootingStar 3s linear infinite;
+            opacity: 0;
+        }
+
+        .shooting-star::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 300px;
+            height: 2px;
+            background: linear-gradient(90deg, rgba(255, 255, 255, 0.8), transparent);
+        }
+
+        @keyframes shootingStar {
+            0% {
+                opacity: 0;
+                transform: rotate(315deg) translateX(0);
+            }
+            5% {
+                opacity: 1;
+            }
+            60% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: rotate(315deg) translateX(-1000px);
+            }
+        }
+
+        .shooting-star:nth-child(1) {
+            top: 20%;
+            left: 80%;
+            animation-delay: 0s;
+        }
+
+        .shooting-star:nth-child(2) {
+            top: 40%;
+            left: 60%;
+            animation-delay: 2s;
+        }
+
+        .shooting-star:nth-child(3) {
+            top: 60%;
+            left: 90%;
+            animation-delay: 4s;
+        }
+    </style>
+</head>
+<body>
+    <div class="secret-area" id="secretArea"></div>
+
+    <div class="particles" id="particles"></div>
+
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+    <div class="shooting-star"></div>
+
+    <div class="container">
+        <div class="text-wrapper">
+            <div class="glow"></div>
+            <p class="main-text" id="mainText"></p>
+        </div>
+    </div>
+
+    <script>
+        const text1 = '过程虽辛苦，';
+        const text2 = '但结局是多么美好呀；';
+        const text3 = '怀着盼望去努力吧！';
+        const fullText = text1 + '\n' + text2 + '\n' + text3;
+
+        const mainText = document.getElementById('mainText');
+        let html = '';
+        const lines = fullText.split('\n');
+        lines.forEach((line, index) => {
+            html += `<span class="line">${line}</span>`;
+        });
+        mainText.innerHTML = html;
+
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+        let clickCount = 0;
+        let lastClickTime = 0;
+        const secretArea = document.getElementById('secretArea');
+
+        secretArea.addEventListener('click', (e) => {
+            const now = Date.now();
+            if (now - lastClickTime > 500) {
+                clickCount = 1;
+            } else {
+                clickCount++;
+            }
+            lastClickTime = now;
+
+            if (clickCount >= 3) {
+                window.location.href = 'https://zoom.us/wc';
+                clickCount = 0;
+            }
+        });
+
+        document.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            window.close();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'F12' || 
+                (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                (e.ctrlKey && e.shiftKey && e.key === 'J') ||
+                (e.ctrlKey && e.key === 'U')) {
+                e.preventDefault();
+                window.close();
+            }
+        });
+    </script>
+</body>
 </html>

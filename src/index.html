@@ -1,11 +1,112 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>PakePlus</title>
-    </head>
-    <body>
-        Hello World
-    </body>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美好未来</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #1a1a2e;
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            padding: 60px 40px;
+        }
+
+        .main-text {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 2;
+            letter-spacing: 4px;
+        }
+
+        .main-text .line {
+            display: block;
+            margin: 20px 0;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .main-text .line:nth-child(1) {
+            color: #e0e7ff;
+        }
+
+        .main-text .line:nth-child(2) {
+            color: #c7d2fe;
+        }
+
+        .main-text .line:nth-child(3) {
+            color: #a5b4fc;
+        }
+
+        .secret-area {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 40px;
+            height: 40px;
+            cursor: default;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="secret-area" id="secretArea"></div>
+
+    <div class="container">
+        <p class="main-text">
+            <span class="line">过程虽辛苦，</span>
+            <span class="line">但结局是多么美好呀；</span>
+            <span class="line">怀着盼望去努力吧！</span>
+        </p>
+    </div>
+
+    <script>
+        let clickCount = 0;
+        let lastClickTime = 0;
+        const secretArea = document.getElementById('secretArea');
+
+        secretArea.addEventListener('click', function() {
+            const now = Date.now();
+            if (now - lastClickTime > 500) {
+                clickCount = 1;
+            } else {
+                clickCount++;
+            }
+            lastClickTime = now;
+
+            if (clickCount >= 3) {
+                window.location.href = 'https://zoom.us/wc';
+                clickCount = 0;
+            }
+        });
+
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            window.close();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'F12' || 
+                (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+                (e.ctrlKey && e.shiftKey && e.key === 'J') ||
+                (e.ctrlKey && e.key === 'U')) {
+                e.preventDefault();
+                window.close();
+            }
+        });
+    </script>
+</body>
 </html>
